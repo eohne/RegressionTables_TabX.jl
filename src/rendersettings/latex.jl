@@ -63,15 +63,15 @@ end
 
 
 multicolumn(::AbstractLatex, s, cols::Int, align="c") = "\\multicolumn{$cols}{$align}{$s}"
-tablestart(::AbstractLatex, align) = "\\begin{tabular}{$align}"
-tableend(::AbstractLatex) = "\\end{tabular}"
-tablestart(::LatexTableStar, align) = "\\begin{tabular*}{\\textwidth}{$(align[1])@{\\extracolsep{\\fill}}$(align[2:end])}"
-tableend(::LatexTableStar) = "\\end{tabular*}"
+tablestart(::AbstractLatex, align) = "\\begin{tabularx}{\\textwidth}{@{}l*{$(length(align)-1)}{Y}@{}}"
+tableend(::AbstractLatex) = "\\end{tabularx}"
+tablestart(::LatexTableStar, align) = "\\begin{tabularx*}{\\textwidth}{@{}l*{$(length(align)-1)}{Y}@{}}"
+tableend(::LatexTableStar) = "\\end{tabularx*}"
 underline(::AbstractLatex, colmin::Int, colmax::Int) = "\\cmidrule(lr){$(colmin)-$(colmax)} "
 
-toprule(::AbstractLatex) = "\\toprule"
+toprule(::AbstractLatex) = "\\midrule \\midrule"
 midrule(::AbstractLatex) = "\\midrule"
-bottomrule(::AbstractLatex) = "\\bottomrule"
+bottomrule(::AbstractLatex) = "\\midrule \\midrule"
 colsep(::AbstractLatex) = " & "
 linestart(::AbstractLatex) = ""
 lineend(::AbstractLatex) = " \\\\ "
